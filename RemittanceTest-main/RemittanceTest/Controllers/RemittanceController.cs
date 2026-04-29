@@ -26,7 +26,7 @@ namespace RemittanceTest.Controllers
             if (result.IsSuccess)
                 return Ok(result.Message);
 
-            if (result.Message == "Null")
+            if (result.Message == "NotFound")
                 return NotFound();
 
             return BadRequest(result.Message);

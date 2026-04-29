@@ -34,7 +34,7 @@ namespace RemittanceTest.Services
                         return (true, "狀態已修改");
                     }
                 }
-                else return (false, "Null");
+                else return (false, "NotFound");
             }
             throw new NotImplementedException();
         }
