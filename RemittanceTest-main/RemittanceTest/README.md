@@ -23,7 +23,13 @@
    - 完成 Vue 內的 `cancelItem(id)` 函數，並根據 API 回傳結果更新 UI。
 5. **架構問答 (請直接回答於下方)**
    - 雖然本測試使用 In-Memory List 模擬資料庫，但在正式的 SQL Server 環境中，您會如何撰寫 T-SQL 或 Entity Framework Core 程式碼，來確保「多個使用者同時對同一筆資料按下取消」時，不會發生 Race Condition？
-   - **您的回答：** (請在此作答...)
+   - **您的回答： 依據我的經驗，在 SQL Server 或 Entity Framework Core 中，
+為了避免多個使用者同時對同一筆資料進行取消操作造成 Race Condition，我會採用「交易（Transaction）搭配條件式更新」的方式處理。
+
+在更新時會加上條件限制，例如：
+UPDATE Remittance
+SET Status = 9
+WHERE Id = '1' AND Status = 0; **
 
 ## 提交要求
 1. 請使用 GitHub Public Repository 提交。
