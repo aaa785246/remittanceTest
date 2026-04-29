@@ -44,6 +44,20 @@
                     // 1. 呼叫 POST API
                     // 2. 處理成功與失敗的回應
                     // 3. 成功後更新 remittances 中的狀態
+                    const res = await fetch(`/api/remittance/${id}/cancel`, {
+                        method: 'POST'
+                    });
+
+                    if (res.ok) {
+                        const item = remittances.value.find(x => x.id === id);
+                        if (item) {
+                            item.status = 9;
+                        }
+                        alert("取消成功");
+                    } else {
+                        const msg = await res.text();
+                        alert("取消失敗：" + msg);
+                    }
                 };
 
                 return { remittances, getStatusText, cancelItem };
