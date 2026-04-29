@@ -19,6 +19,22 @@ namespace RemittanceTest.Services
         {
             // TODO: 請在此處實作「取消」的商業邏輯與防併發檢核
 
+            lock (_lockObj)
+            {
+                var result = _db.FirstOrDefault(x => x.Id == id);
+                if(result != null)
+                {
+                    if (result.Status != 0)
+                    {
+                        return (false, "狀態不可修改");
+                    }
+                    else
+                    {
+                        result.Status = 9;
+                        return (true, "狀態已修改");
+                    }
+                }
+            }
             throw new NotImplementedException();
         }
     }
